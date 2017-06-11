@@ -116,10 +116,10 @@ var Dropship;
                 var tabletText = this.game.add.text(this.game.width * 0.5, this.game.height * 0.45, "", style1, this.group2);
                 tabletText.anchor.setTo(0.5, 0.375);
                 if (this.game.state.states['Options'].useJoystick == false) {
-                    tabletText.setText('No joystick');
+                    tabletText.setText('Tilt to steer\n\nTap left side of screen to thrust\n\nTap right hand of screen to fire\n\nSwipe down to drop bomb');
                 }
                 else {
-                    tabletText.setText('Using joystick');
+                    tabletText.setText('Steer left/right with the slider on bottom left\n\nTap right side (bottom half) to thrust\n\nTap right side (top half) to fire');
                 }
             }
         };

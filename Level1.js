@@ -13,8 +13,8 @@ var Dropship;
             this.MISSILE_SPEED = 20;
             this.SHIP_ROTATE_SPEED = 4;
             this._swipeActive = false;
-            this._upTolerance = 40;
-            this._downTolerance = 100;
+            this._upTolerance = 20; //40;
+            this._downTolerance = 20; //100;
             this._leftTolerance = 60;
             this._rightTolerance = 60;
             this._cameraOverlap = 120;
@@ -221,10 +221,10 @@ var Dropship;
             // create drones
             this._drones.classType = Dron;
             var dronList = [
-                { "x": -80, "y": -220, "rotation": 0, "type": 1, "level": 1 },
-                { "x": -150, "y": -175, "rotation": 0, "type": 1, "level": 1 },
-                { "x": 20, "y": 920, "rotation": 0, "type": 1, "level": 1 },
-                { "x": -120, "y": 820, "rotation": 0, "type": 1, "level": 1 },
+                { "x": -80, "y": -220, "rotation": 0, "type": 1, "level": 2 },
+                { "x": -150, "y": -175, "rotation": 0, "type": 1, "level": 2 },
+                { "x": 20, "y": 920, "rotation": 0, "type": 1, "level": 2 },
+                { "x": -120, "y": 820, "rotation": 0, "type": 1, "level": 2 },
             ];
             for (var i = 0; i < dronList.length; i++) {
                 if (dronList[i].level == this.game.state.states['MainMenu'].level) {
@@ -452,13 +452,13 @@ var Dropship;
             // sentries group
             this._sentries = this.game.add.group();
             var sentryList = [
-                { "x": 735, "y": -1160, "rotation": 270, "type": 1, "level": 1 },
-                { "x": -775, "y": 200, "rotation": 90, "type": 1, "level": 1 },
-                { "x": -740, "y": 570, "rotation": 135, "type": 0, "level": 1 },
-                { "x": 700, "y": 1215, "rotation": 0, "type": 0, "level": 1 },
-                { "x": -215, "y": -588, "rotation": 0, "type": 0, "level": 1 },
-                { "x": -205, "y": -335, "rotation": 180, "type": 1, "level": 1 },
-                { "x": -775, "y": -95, "rotation": 90, "type": 1, "level": 1 }
+                { "x": 735, "y": -1160, "rotation": 270, "type": 1, "level": 2 },
+                { "x": -775, "y": 200, "rotation": 90, "type": 1, "level": 2 },
+                { "x": -740, "y": 570, "rotation": 135, "type": 0, "level": 2 },
+                { "x": 700, "y": 1215, "rotation": 0, "type": 0, "level": 2 },
+                { "x": -215, "y": -588, "rotation": 0, "type": 0, "level": 2 },
+                { "x": -205, "y": -335, "rotation": 180, "type": 1, "level": 2 },
+                { "x": -775, "y": -95, "rotation": 90, "type": 1, "level": 2 }
             ];
             for (var i = 0; i < sentryList.length; i++) {
                 if (sentryList[i].level == this.game.state.states['MainMenu'].level) {
@@ -502,34 +502,36 @@ var Dropship;
             var objectsList = [
                 { "x": -260, "y": -200, "rotation": 90, "type": 'telebase', "level": 0 },
                 { "x": -260, "y": -100, "rotation": 90, "type": 'telebase', "level": 0 },
-                { "x": 175, "y": 145, "rotation": 90, "type": 'sheildBonus', "level": 1 },
-                { "x": -120, "y": -360, "rotation": 0, "type": 'octoid', "level": 1 },
-                { "x": -90, "y": -380, "rotation": 180, "type": 'octoid', "level": 1 },
-                { "x": -60, "y": -360, "rotation": 0, "type": 'octoid', "level": 1 },
-                { "x": -30, "y": -380, "rotation": 180, "type": 'octoid', "level": 1 },
-                { "x": 0, "y": -360, "rotation": 0, "type": 'octoid', "level": 1 },
-                { "x": 30, "y": -380, "rotation": 180, "type": 'octoid', "level": 1 },
-                { "x": 60, "y": -360, "rotation": 0, "type": 'octoid', "level": 1 },
-                { "x": 90, "y": -380, "rotation": 180, "type": 'octoid', "level": 1 },
-                { "x": 175, "y": 185, "rotation": 90, "type": 'tripper', "level": 1 },
-                { "x": 593, "y": -222, "rotation": 0, "type": 'drone', "level": 1 },
-                { "x": 483, "y": -111, "rotation": 0, "type": 'drone', "level": 1 },
-                { "x": -620, "y": -1205, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -620, "y": -1165, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -620, "y": -1125, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -620, "y": -1085, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -650, "y": -1185, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -650, "y": -1145, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -650, "y": -1105, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -590, "y": -1185, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -590, "y": -1145, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -590, "y": -1105, "rotation": 90, "type": 'hexoid', "level": 1 },
-                { "x": -259, "y": 320, "rotation": 45, "type": 'telebase', "level": 1 },
-                { "x": -785, "y": 1170, "rotation": 90, "type": 'telebase', "level": 1 },
-                { "x": -781, "y": -1224, "rotation": 90, "type": 'telebase', "level": 1 },
-                { "x": -781, "y": -1044, "rotation": 90, "type": 'telebase', "level": 1 },
-                { "x": 275, "y": -909, "rotation": 135, "type": 'telebase', "level": 1 },
-                { "x": -310, "y": -1105, "rotation": 270, "type": 'crystal', "level": 1 }
+                { "x": -260, "y": -200, "rotation": 90, "type": 'telebase', "level": 1 },
+                { "x": -260, "y": -100, "rotation": 90, "type": 'telebase', "level": 1 },
+                { "x": 175, "y": 145, "rotation": 90, "type": 'sheildBonus', "level": 2 },
+                { "x": -120, "y": -360, "rotation": 0, "type": 'octoid', "level": 2 },
+                { "x": -90, "y": -380, "rotation": 180, "type": 'octoid', "level": 2 },
+                { "x": -60, "y": -360, "rotation": 0, "type": 'octoid', "level": 2 },
+                { "x": -30, "y": -380, "rotation": 180, "type": 'octoid', "level": 2 },
+                { "x": 0, "y": -360, "rotation": 0, "type": 'octoid', "level": 2 },
+                { "x": 30, "y": -380, "rotation": 180, "type": 'octoid', "level": 2 },
+                { "x": 60, "y": -360, "rotation": 0, "type": 'octoid', "level": 2 },
+                { "x": 90, "y": -380, "rotation": 180, "type": 'octoid', "level": 2 },
+                { "x": 175, "y": 185, "rotation": 90, "type": 'tripper', "level": 2 },
+                { "x": 593, "y": -222, "rotation": 0, "type": 'drone', "level": 2 },
+                { "x": 483, "y": -111, "rotation": 0, "type": 'drone', "level": 2 },
+                { "x": -620, "y": -1205, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -620, "y": -1165, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -620, "y": -1125, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -620, "y": -1085, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -650, "y": -1185, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -650, "y": -1145, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -650, "y": -1105, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -590, "y": -1185, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -590, "y": -1145, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -590, "y": -1105, "rotation": 90, "type": 'hexoid', "level": 2 },
+                { "x": -259, "y": 320, "rotation": 45, "type": 'telebase', "level": 2 },
+                { "x": -785, "y": 1170, "rotation": 90, "type": 'telebase', "level": 2 },
+                { "x": -781, "y": -1224, "rotation": 90, "type": 'telebase', "level": 2 },
+                { "x": -781, "y": -1044, "rotation": 90, "type": 'telebase', "level": 2 },
+                { "x": 275, "y": -909, "rotation": 135, "type": 'telebase', "level": 2 },
+                { "x": -310, "y": -1105, "rotation": 270, "type": 'crystal', "level": 2 }
             ];
             for (var i = 0; i < objectsList.length; i++) {
                 if (objectsList[i].level == this.game.state.states['MainMenu'].level) {
@@ -615,10 +617,10 @@ var Dropship;
             }
             this._antiGravities = this.game.add.group();
             var antiGravsList = [
-                { "x": 140, "y": 0, "rotation": 0, "landscape": true, "level": 1 },
-                { "x": 650, "y": -175, "rotation": 180, "landscape": true, "level": 1 },
-                { "x": -200, "y": 142, "rotation": 0, "landscape": false, "level": 1 },
-                { "x": -100, "y": -1173, "rotation": 180, "landscape": false, "level": 1 },
+                { "x": 140, "y": 0, "rotation": 0, "landscape": true, "level": 2 },
+                { "x": 650, "y": -175, "rotation": 180, "landscape": true, "level": 2 },
+                { "x": -200, "y": 142, "rotation": 0, "landscape": false, "level": 2 },
+                { "x": -100, "y": -1173, "rotation": 180, "landscape": false, "level": 2 },
             ];
             for (var i = 0; i < antiGravsList.length; i++) {
                 if (antiGravsList[i].level == this.game.state.states['MainMenu'].level) {
@@ -675,7 +677,8 @@ var Dropship;
             this._allGroup.add(this._teleporters);
             var teleporterList = [
                 { "x": 100, "y": 100, "rotation": 0, "level": 0 },
-                { "x": -140, "y": -220, "rotation": 0, "level": 1 }
+                { "x": 100, "y": -200, "rotation": 0, "level": 1 },
+                { "x": -140, "y": -220, "rotation": 0, "level": 2 }
             ];
             for (var i = 0; i < teleporterList.length; i++) {
                 if (teleporterList[i].level == this.game.state.states['MainMenu'].level) {
@@ -942,13 +945,13 @@ var Dropship;
                     }
                 }*/
                 if (this._base.y < (this.game.camera.y + this._upTolerance)) {
-                    this._downTolerance = 60;
-                    this._upTolerance = 40;
+                    //this._downTolerance = 60;
+                    //this._upTolerance = 40;
                     this.callTransition('up');
                 }
                 if (this._base.y > (this.game.camera.y + (this.game.camera.height - this._downTolerance))) {
-                    this._upTolerance = 0;
-                    this._downTolerance = 100;
+                    //this._upTolerance = 0;
+                    //this._downTolerance = 100;
                     this.callTransition('down');
                 }
                 if (this._base.x < (this.game.camera.x + this._leftTolerance)) {
@@ -1498,6 +1501,7 @@ var Dropship;
             }
             if (this.name == 'telebase') {
                 this.animations.add("main", Phaser.Animation.generateFrameNames("telebase", 0, 19, "", 4), 30, true);
+                this.animations.add("blowup", Phaser.Animation.generateFrameNames("telebase", 22, 40, "", 4), 30, true);
             }
             this.animations.play('main');
         };
@@ -1531,7 +1535,8 @@ var Dropship;
                     this.kill();
                 }
                 if (this.name == 'telebase') {
-                    this.kill();
+                    //this.kill();
+                    this.animations.play("blowup", 30, false, true);
                     var moreTelebasesAlive = false;
                     for (var i = 0; i < this.stateInstance._objects.length; i++) {
                         var obj = this.stateInstance._objects.getChildAt(i);
