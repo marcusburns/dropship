@@ -500,10 +500,9 @@ var Dropship;
             this._objects.enableBody = true;
             this._objects.physicsBodyType = Phaser.Physics.P2JS;
             var objectsList = [
-                { "x": -260, "y": -200, "rotation": 90, "type": 'telebase', "level": 0 },
-                { "x": -260, "y": -100, "rotation": 90, "type": 'telebase', "level": 0 },
-                { "x": -260, "y": -200, "rotation": 90, "type": 'telebase', "level": 1 },
-                { "x": -260, "y": -100, "rotation": 90, "type": 'telebase', "level": 1 },
+                { "x": -255, "y": -150, "rotation": 90, "type": 'telebase', "level": 0 },
+                { "x": -175, "y": -1100, "rotation": 90, "type": 'telebase', "level": 1 },
+                { "x": -60, "y": -148, "rotation": 180, "type": 'telebase', "level": 1 },
                 { "x": 175, "y": 145, "rotation": 90, "type": 'sheildBonus', "level": 2 },
                 { "x": -120, "y": -360, "rotation": 0, "type": 'octoid', "level": 2 },
                 { "x": -90, "y": -380, "rotation": 180, "type": 'octoid', "level": 2 },
@@ -676,8 +675,8 @@ var Dropship;
             this._teleporters = this.game.add.group();
             this._allGroup.add(this._teleporters);
             var teleporterList = [
-                { "x": 100, "y": 100, "rotation": 0, "level": 0 },
-                { "x": 100, "y": -200, "rotation": 0, "level": 1 },
+                { "x": 120, "y": 230, "rotation": 0, "level": 0 },
+                { "x": 170, "y": -1130, "rotation": 0, "level": 1 },
                 { "x": -140, "y": -220, "rotation": 0, "level": 2 }
             ];
             for (var i = 0; i < teleporterList.length; i++) {
@@ -716,12 +715,7 @@ var Dropship;
                     obj.body.y = newPoint.y;
                     obj.body.angle = obj.body.angle + 90;
                 }, this);
-                this._teleporters.forEach(function (obj) {
-                    var newPoint = this.rotate_point(obj.body.x, obj.body.y, this.world.centerX, this.world.centerY, 90);
-                    obj.body.x = newPoint.x;
-                    obj.body.y = newPoint.y;
-                    obj.body.angle = obj.body.angle + 90;
-                }, this);
+                // Teleporters cannot be rotated until they are added to stage
                 this._drones.forEach(function (drone) {
                     var newPoint = this.rotate_point(drone.body.x, drone.body.y, this.world.centerX, this.world.centerY, 90);
                     drone.body.x = newPoint.x;
@@ -1535,24 +1529,33 @@ var Dropship;
                     this.kill();
                 }
                 if (this.name == 'telebase') {
-                    //this.kill();
-                    this.animations.play("blowup", 30, false, true);
-                    var moreTelebasesAlive = false;
-                    for (var i = 0; i < this.stateInstance._objects.length; i++) {
-                        var obj = this.stateInstance._objects.getChildAt(i);
-                        if (obj.name == 'telebase') {
-                            if (obj.damageTaken == 0) {
-                                moreTelebasesAlive = true;
+                    if (this.alive) {
+                        //this.kill();
+                        this.animations.play("blowup", 30, false, true);
+                        console.log('telebase blowing up');
+                        var moreTelebasesAlive = false;
+                        for (var i = 0; i < this.stateInstance._objects.length; i++) {
+                            var obj = this.stateInstance._objects.getChildAt(i);
+                            if (obj.name == 'telebase') {
+                                if (obj.damageTaken == 0) {
+                                    moreTelebasesAlive = true;
+                                }
                             }
                         }
-                    }
-                    if (moreTelebasesAlive == false) {
-                        this.stateInstance._teleporters.add(this.stateInstance.teleporter);
-                        this.stateInstance.teleporter.body.collides([this.stateInstance._shipCollisionGroup]);
-                        this.stateInstance._base.body.collides([this.stateInstance._teleporterCollisionGroup]);
-                    }
-                    else {
-                        console.log('kill mmore telebasi');
+                        if (moreTelebasesAlive == false) {
+                            this.stateInstance._teleporters.add(this.stateInstance.teleporter);
+                            if (this.game.state.states['MainMenu'].landscapeLayout == true) {
+                                var newPoint = this.stateInstance.rotate_point(this.stateInstance.teleporter.body.x, this.stateInstance.teleporter.body.y, this.stateInstance.world.centerX, this.stateInstance.world.centerY, 90);
+                                this.stateInstance.teleporter.body.x = newPoint.x;
+                                this.stateInstance.teleporter.body.y = newPoint.y;
+                            }
+                            this.stateInstance.teleporter.body.collides([this.stateInstance._shipCollisionGroup]);
+                            this.stateInstance._base.body.collides([this.stateInstance._teleporterCollisionGroup]);
+                        }
+                        else {
+                            console.log('kill mmore telebasi');
+                        }
+                        this.alive = false;
                     }
                 }
                 if (this.name == 'crystal') {
